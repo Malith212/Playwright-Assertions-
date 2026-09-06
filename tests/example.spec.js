@@ -32,10 +32,21 @@ test.only('test2', async ({ page }) => {
   const productCount = await productNames.count();
   console.log(`Number of products: ${productCount}`);
 
+  const productName= "Baseball Bat Adult,Classic Wooden Youth Baseball Bat for Baseball Training,Home Self Defense Baseball Bats for Teenagers";
+
   for (let i = 0; i < productCount; i++) {
     const productName = await productNames.nth(i).textContent();
     console.log(`Product ${i + 1}: ${productName}`);
+
+    if (productName.includes("Baseball Bat Adult,Classic Wooden Youth Baseball Bat for Baseball Training,Home Self Defense Baseball Bats for Teenagers")) {
+      console.log(`Found the product: ${productName}`);
+      //clcick on the product
+      await productNames.nth(i).click();
+      break;
+    }
   }
+
+  await page.waitForTimeout(4000);
 
 
 });
